@@ -8,6 +8,7 @@
 import Vue from 'vue'
 import App from '../app.vue'
 import '../css/application.css'
+import "@fortawesome/fontawesome-free/js/all";
 
 document.addEventListener('DOMContentLoaded', () => {
   const app = new Vue({
