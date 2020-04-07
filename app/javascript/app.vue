@@ -1,17 +1,29 @@
 <template>
   <div id="app">
-    <p>{{ message }}</p>
+    <p>Home</p>
+    <Videos v-bind:videos="videos"/>
   </div>
 </template>
 
 <script>
-export default {
-  data: function () {
-    return {
-      message: "Hello Vue!"
+  import Videos from './packs/components/Videos'
+  import axios from 'axios'
+
+  export default {
+    components: {
+      Videos
+    },
+    data() {
+      return {
+        videos: []
+      }
+    },
+    created(){
+      axios.get('https://fwfg.com/api/contents?category_id=23751')
+        .then(res => this.videos = res.data)
+        .catch(err => console.log(err))
     }
   }
-}
 </script>
 
 <style scoped>
