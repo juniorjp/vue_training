@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_07_191833) do
+ActiveRecord::Schema.define(version: 2020_04_07_200045) do
 
   create_table "users", force: :cascade do |t|
     t.string "uuid"
@@ -18,6 +18,17 @@ ActiveRecord::Schema.define(version: 2020_04_07_191833) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["uuid"], name: "index_users_on_uuid"
+  end
+
+  create_table "videos", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.string "duration"
+    t.string "main_poster"
+    t.string "gif_preview"
+    t.integer "external_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
 end
