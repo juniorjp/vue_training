@@ -1,8 +1,7 @@
 module V1
   class UsersController < ApplicationController
     def create
-      @user = User.new(user_params)
-      @user.uuid = SecureRandom.uuid
+      @user = User.new(uuid: SecureRandom.uuid)
       generate_token
 
       if @user.save
@@ -13,10 +12,6 @@ module V1
     end
 
     private
-
-    def user_params
-      params.require(:user).permit(:current_ip)
-    end
 
     def generate_token
       payload = {
