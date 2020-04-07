@@ -4,5 +4,6 @@ Rails.application.routes.draw do
 
     #main resources
     resources :users, defaults: { format: 'json' }
+    resources :videos, defaults: { format: 'json' }
   end
 end

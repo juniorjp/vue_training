@@ -6,7 +6,7 @@ RSpec.describe V1::UsersController, type: :controller do
     render_views
     let(:current_ip) { Faker::Internet.public_ip_v4_address  }
 
-    it 'returns http success with a new parking model' do
+    it 'returns http success with a new user model' do
       @request.headers['api_version'] = 'v1'
       post :create, params: {user: {current_ip: current_ip}}, format: :json
       expect(response).to have_http_status(200)
