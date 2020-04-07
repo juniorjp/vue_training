@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="grid grid-cols-1 gap-4">
     <div v-bind:key="video.id" v-for="video in videos">
       <Video v-bind:video="video" />
     </div>
