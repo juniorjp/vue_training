@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_07_200045) do
+ActiveRecord::Schema.define(version: 2020_04_07_200556) do
+
+  create_table "user_votes", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "video_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_user_votes_on_user_id"
+    t.index ["video_id"], name: "index_user_votes_on_video_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "uuid"
