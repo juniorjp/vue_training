@@ -1,7 +1,7 @@
 <template>
   <div class="grid grid-cols-1 gap-4">
     <div v-bind:key="video.id" v-for="video in videos">
-      <Video v-bind:video="video" />
+      <Video v-bind:video="video" v-on:add-vote="$emit('add-vote', video.id)"  />
     </div>
   </div>
 </template>

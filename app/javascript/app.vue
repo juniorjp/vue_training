@@ -1,8 +1,8 @@
 <template>
-  <div id="app">
+  <div id="app" class="container mx-auto">
     <p>Home</p>
     <p>Votes left: {{user.votes}}</p>
-    <Videos v-bind:videos="videos"/>
+    <Videos v-bind:videos="videos"  v-on:add-vote="addVote" />
   </div>
 </template>
 
@@ -28,6 +28,26 @@
       this.syncUser()
     },
     methods: {
+      addVote(videoId){
+        axios.post('/votes', {video_id: videoId},
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              'api_version': 'v1',
+              'X-CSRF-Token': getPageToken(),
+              'token': this.user.token,
+              "Authorization": this.user.token
+            }
+          }
+        )
+        .then(res => {
+          this.user.votes--
+          const video = this.videos.find(v => v.id === videoId)
+          video.votes++
+          localStorage.setItem('video_home_user', JSON.stringify(this.user))
+        })
+        .catch(err => console.log(err))
+      },
       syncUser(){
         const storedUser = localStorage.getItem('video_home_user');
         let user = null;
@@ -36,6 +56,7 @@
           return null
         }
 
+        //Create user
         this.user = axios.post('/users', {},
           {
             headers: {
@@ -44,15 +65,13 @@
               'X-CSRF-Token': getPageToken(),
             }
           }
-        )
-          .then(res => {
+        ).then(res => {
             this.user = res.data
             localStorage.setItem('video_home_user', JSON.stringify({...this.user, votes: 50}));
           })
           .catch(err => console.log(err))
       }
     }
-
   }
 
   const getPageToken = function(){

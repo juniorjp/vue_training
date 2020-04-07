@@ -11,9 +11,9 @@
       <p>{{video.title}}</p>
       <p v-html="video.description"></p>
     </div>
-    <div>
+    <div v-on:click="addVote">
         <i class="fas fa-heart fa-3x mx-2"></i>
-
+        {{video.votes}} votes
     </div>
   </div>
 </template>
@@ -34,6 +34,9 @@ export default {
         }else{
           return this.video.main_poster
         }
+      },
+      addVote(){
+        this.$emit('add-vote', this.video.id);
       }
     }
 }
